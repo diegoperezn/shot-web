@@ -1,0 +1,30 @@
+<mat-card>
+  <mat-card-title>Pacientes</mat-card-title>
+  <mat-card-subtitle>Listado de pacientes</mat-card-subtitle>
+  <div class="mat-elevation-z8">
+    <mat-table #table [dataSource]="dataSource" matSort aria-label="Elements">
+
+      <!-- Id Column -->
+      <ng-container matColumnDef="documento">
+        <mat-header-cell *matHeaderCellDef mat-sort-header>Documento</mat-header-cell>
+        <mat-cell *matCellDef="let row">{{row.documento}}</mat-cell>
+      </ng-container>
+
+      <!-- Name Column -->
+      <ng-container matColumnDef="nombre">
+        <mat-header-cell *matHeaderCellDef mat-sort-header>Nombre</mat-header-cell>
+        <mat-cell *matCellDef="let row">{{row.nombre}}</mat-cell>
+      </ng-container>
+
+      <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+      <mat-row (click)="onRowClick(row)" *matRowDef="let row; columns: displayedColumns;"></mat-row>
+    </mat-table>
+
+    <mat-paginator #paginator
+      [length]="dataSource.data.length"
+      [pageIndex]="0"
+      [pageSize]="10"
+      (page)="onPageChange($event)">
+    </mat-paginator>
+  </div>
+</mat-card>
